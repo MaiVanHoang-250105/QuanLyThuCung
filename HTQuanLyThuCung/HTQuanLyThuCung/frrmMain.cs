@@ -29,7 +29,7 @@ namespace HTQuanLyThuCung
             lblPets.Text = "🐶 Thú cưng\n" + pets;
             lblCustomers.Text = "👤 Khách hàng\n" + customers;
             lblServices.Text = "💅 Dịch vụ\n" + services;
-            lblAppointments.Text = "📅 Lịch hẹn\n" + appointments;
+            lblAppointments.Text = "📅 Tổng lịch hẹn\n" + appointments;
 
             chartStats.Series.Clear();
 
