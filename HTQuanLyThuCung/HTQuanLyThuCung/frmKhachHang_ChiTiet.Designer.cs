@@ -16,6 +16,16 @@
         private void InitializeComponent()
         {
             this.panelMain = new System.Windows.Forms.Panel();
+            this.dgvPets = new System.Windows.Forms.DataGridView();
+            this.colPetId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPetName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPetType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPetBreed = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPetAge = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPetEdit = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.colPetDelete = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.lblPets = new System.Windows.Forms.Label();
+            this.btnAddPet = new System.Windows.Forms.Button();
             this.dgvPurchaseHistory = new System.Windows.Forms.DataGridView();
             this.colInvoiceId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -36,6 +46,7 @@
             this.txtName = new System.Windows.Forms.TextBox();
             this.lblName = new System.Windows.Forms.Label();
             this.panelMain.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPets)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPurchaseHistory)).BeginInit();
             this.panelButtons.SuspendLayout();
             this.SuspendLayout();
@@ -43,6 +54,9 @@
             // panelMain
             // 
             this.panelMain.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(245)))), ((int)(((byte)(245)))));
+            this.panelMain.Controls.Add(this.dgvPets);
+            this.panelMain.Controls.Add(this.lblPets);
+            this.panelMain.Controls.Add(this.btnAddPet);
             this.panelMain.Controls.Add(this.dgvPurchaseHistory);
             this.panelMain.Controls.Add(this.lblPurchaseHistory);
             this.panelMain.Controls.Add(this.panelButtons);
@@ -60,8 +74,118 @@
             this.panelMain.Location = new System.Drawing.Point(0, 0);
             this.panelMain.Name = "panelMain";
             this.panelMain.Padding = new System.Windows.Forms.Padding(35, 30, 35, 30);
-            this.panelMain.Size = new System.Drawing.Size(950, 650);
+            this.panelMain.Size = new System.Drawing.Size(1000, 750);
             this.panelMain.TabIndex = 0;
+            // 
+            // dgvPets
+            // 
+            this.dgvPets.AllowUserToAddRows = false;
+            this.dgvPets.AllowUserToDeleteRows = false;
+            this.dgvPets.BackgroundColor = System.Drawing.Color.White;
+            this.dgvPets.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgvPets.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvPets.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colPetId,
+            this.colPetName,
+            this.colPetType,
+            this.colPetBreed,
+            this.colPetAge,
+            this.colPetEdit,
+            this.colPetDelete});
+            this.dgvPets.EnableHeadersVisualStyles = false;
+            this.dgvPets.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
+            this.dgvPets.Location = new System.Drawing.Point(35, 620);
+            this.dgvPets.Name = "dgvPets";
+            this.dgvPets.ReadOnly = true;
+            this.dgvPets.RowHeadersVisible = false;
+            this.dgvPets.RowTemplate.Height = 35;
+            this.dgvPets.Size = new System.Drawing.Size(930, 110);
+            this.dgvPets.TabIndex = 19;
+            this.dgvPets.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPets_CellContentClick);
+            // 
+            // colPetId
+            // 
+            this.colPetId.HeaderText = "ID";
+            this.colPetId.Name = "colPetId";
+            this.colPetId.ReadOnly = true;
+            this.colPetId.Visible = false;
+            this.colPetId.Width = 50;
+            // 
+            // colPetName
+            // 
+            this.colPetName.HeaderText = "Tên thú";
+            this.colPetName.Name = "colPetName";
+            this.colPetName.ReadOnly = true;
+            this.colPetName.Width = 150;
+            // 
+            // colPetType
+            // 
+            this.colPetType.HeaderText = "Loại";
+            this.colPetType.Name = "colPetType";
+            this.colPetType.ReadOnly = true;
+            this.colPetType.Width = 100;
+            // 
+            // colPetBreed
+            // 
+            this.colPetBreed.HeaderText = "Giống";
+            this.colPetBreed.Name = "colPetBreed";
+            this.colPetBreed.ReadOnly = true;
+            this.colPetBreed.Width = 200;
+            // 
+            // colPetAge
+            // 
+            this.colPetAge.HeaderText = "Tuổi";
+            this.colPetAge.Name = "colPetAge";
+            this.colPetAge.ReadOnly = true;
+            this.colPetAge.Width = 80;
+            // 
+            // colPetEdit
+            // 
+            this.colPetEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.colPetEdit.HeaderText = "Thao tác";
+            this.colPetEdit.Name = "colPetEdit";
+            this.colPetEdit.ReadOnly = true;
+            this.colPetEdit.Text = "✏️";
+            this.colPetEdit.UseColumnTextForButtonValue = true;
+            this.colPetEdit.Width = 80;
+            // 
+            // colPetDelete
+            // 
+            this.colPetDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.colPetDelete.HeaderText = "";
+            this.colPetDelete.Name = "colPetDelete";
+            this.colPetDelete.ReadOnly = true;
+            this.colPetDelete.Text = "🗑";
+            this.colPetDelete.UseColumnTextForButtonValue = true;
+            this.colPetDelete.Width = 60;
+            // 
+            // lblPets
+            // 
+            this.lblPets.AutoSize = true;
+            this.lblPets.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
+            this.lblPets.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(150)))), ((int)(((byte)(243)))));
+            this.lblPets.Location = new System.Drawing.Point(32, 585);
+            this.lblPets.Name = "lblPets";
+            this.lblPets.Size = new System.Drawing.Size(198, 25);
+            this.lblPets.TabIndex = 18;
+            this.lblPets.Text = "Danh sách thú cưng";
+            // 
+            // btnAddPet
+            // 
+            this.btnAddPet.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(150)))), ((int)(((byte)(243)))));
+            this.btnAddPet.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnAddPet.FlatAppearance.BorderSize = 0;
+            this.btnAddPet.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(118)))), ((int)(((byte)(210)))));
+            this.btnAddPet.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAddPet.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.btnAddPet.ForeColor = System.Drawing.Color.White;
+            this.btnAddPet.Location = new System.Drawing.Point(865, 587);
+            this.btnAddPet.Name = "btnAddPet";
+            this.btnAddPet.Size = new System.Drawing.Size(100, 30);
+            this.btnAddPet.TabIndex = 17;
+            this.btnAddPet.Text = "+ Thêm pet";
+            this.btnAddPet.UseVisualStyleBackColor = false;
+            this.btnAddPet.Click += new System.EventHandler(this.btnAddPet_Click);
             // 
             // dgvPurchaseHistory
             // 
@@ -81,8 +205,8 @@
             this.dgvPurchaseHistory.Name = "dgvPurchaseHistory";
             this.dgvPurchaseHistory.ReadOnly = true;
             this.dgvPurchaseHistory.RowHeadersVisible = false;
-            this.dgvPurchaseHistory.RowTemplate.Height = 38;
-            this.dgvPurchaseHistory.Size = new System.Drawing.Size(880, 170);
+            this.dgvPurchaseHistory.RowTemplate.Height = 35;
+            this.dgvPurchaseHistory.Size = new System.Drawing.Size(930, 110);
             this.dgvPurchaseHistory.TabIndex = 16;
             // 
             // colInvoiceId
@@ -111,7 +235,7 @@
             this.colEmployee.HeaderText = "Nhân viên";
             this.colEmployee.Name = "colEmployee";
             this.colEmployee.ReadOnly = true;
-            this.colEmployee.Width = 240;
+            this.colEmployee.Width = 290;
             // 
             // lblPurchaseHistory
             // 
@@ -130,7 +254,7 @@
             this.panelButtons.Controls.Add(this.btnClose);
             this.panelButtons.Location = new System.Drawing.Point(505, 360);
             this.panelButtons.Name = "panelButtons";
-            this.panelButtons.Size = new System.Drawing.Size(410, 45);
+            this.panelButtons.Size = new System.Drawing.Size(460, 45);
             this.panelButtons.TabIndex = 14;
             // 
             // btnEdit
@@ -142,7 +266,7 @@
             this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnEdit.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.btnEdit.ForeColor = System.Drawing.Color.White;
-            this.btnEdit.Location = new System.Drawing.Point(295, 5);
+            this.btnEdit.Location = new System.Drawing.Point(345, 5);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(110, 38);
             this.btnEdit.TabIndex = 11;
@@ -159,7 +283,7 @@
             this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnClose.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.btnClose.ForeColor = System.Drawing.Color.White;
-            this.btnClose.Location = new System.Drawing.Point(165, 5);
+            this.btnClose.Location = new System.Drawing.Point(215, 5);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(110, 38);
             this.btnClose.TabIndex = 10;
@@ -199,7 +323,7 @@
             this.txtEmail.Multiline = true;
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.ReadOnly = true;
-            this.txtEmail.Size = new System.Drawing.Size(420, 38);
+            this.txtEmail.Size = new System.Drawing.Size(470, 38);
             this.txtEmail.TabIndex = 7;
             // 
             // lblEmail
@@ -222,7 +346,7 @@
             this.txtAddress.Multiline = true;
             this.txtAddress.Name = "txtAddress";
             this.txtAddress.ReadOnly = true;
-            this.txtAddress.Size = new System.Drawing.Size(420, 38);
+            this.txtAddress.Size = new System.Drawing.Size(440, 38);
             this.txtAddress.TabIndex = 5;
             // 
             // lblAddress
@@ -245,7 +369,7 @@
             this.txtPhone.Multiline = true;
             this.txtPhone.Name = "txtPhone";
             this.txtPhone.ReadOnly = true;
-            this.txtPhone.Size = new System.Drawing.Size(420, 38);
+            this.txtPhone.Size = new System.Drawing.Size(470, 38);
             this.txtPhone.TabIndex = 3;
             // 
             // lblPhone
@@ -268,7 +392,7 @@
             this.txtName.Multiline = true;
             this.txtName.Name = "txtName";
             this.txtName.ReadOnly = true;
-            this.txtName.Size = new System.Drawing.Size(420, 38);
+            this.txtName.Size = new System.Drawing.Size(440, 38);
             this.txtName.TabIndex = 1;
             // 
             // lblName
@@ -287,7 +411,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(950, 650);
+            this.ClientSize = new System.Drawing.Size(1000, 750);
             this.Controls.Add(this.panelMain);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
@@ -296,12 +420,16 @@
             this.Text = "Thông tin khách hàng";
             this.panelMain.ResumeLayout(false);
             this.panelMain.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPets)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPurchaseHistory)).EndInit();
             this.panelButtons.ResumeLayout(false);
             this.ResumeLayout(false);
         }
 
         private System.Windows.Forms.Panel panelMain;
+        private System.Windows.Forms.DataGridView dgvPets;
+        private System.Windows.Forms.Label lblPets;
+        private System.Windows.Forms.Button btnAddPet;
         private System.Windows.Forms.DataGridView dgvPurchaseHistory;
         private System.Windows.Forms.Label lblPurchaseHistory;
         private System.Windows.Forms.Panel panelButtons;
@@ -317,6 +445,13 @@
         private System.Windows.Forms.Label lblPhone;
         private System.Windows.Forms.TextBox txtName;
         private System.Windows.Forms.Label lblName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPetId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPetName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPetType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPetBreed;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPetAge;
+        private System.Windows.Forms.DataGridViewButtonColumn colPetEdit;
+        private System.Windows.Forms.DataGridViewButtonColumn colPetDelete;
         private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceId;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTotal;

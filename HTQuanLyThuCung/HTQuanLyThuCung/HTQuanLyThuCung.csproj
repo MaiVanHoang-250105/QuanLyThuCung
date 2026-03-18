@@ -85,6 +85,12 @@
     <Compile Include="frmKhachHang_ChiTiet.Designer.cs">
       <DependentUpon>frmKhachHang_ChiTiet.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmPetForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPetForm.Designer.cs">
+      <DependentUpon>frmPetForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmQuenMK.cs">
       <SubType>Form</SubType>
     </Compile>

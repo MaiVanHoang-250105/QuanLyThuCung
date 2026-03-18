@@ -1,5 +1,6 @@
 ﻿using HTQuanLyThuCung;
 using HTQuanLyThuCung.Helpers;
+using QuanLyThuCung;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +21,7 @@ namespace HTQuanLyThuCung
             // Application.Run(new frmHashPassword());
 
             // Form đăng nhập chính
-            frmDangNhap loginForm = new frmDangNhap();
+            frmKhachHang loginForm = new frmKhachHang();
             FontHelper.SetUnicodeFont(loginForm);
             Application.Run(loginForm);
         }

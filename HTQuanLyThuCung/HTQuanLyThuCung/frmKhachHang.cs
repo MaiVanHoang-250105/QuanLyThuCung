@@ -11,7 +11,19 @@ namespace QuanLyThuCung
     {
         private List<Customer> customers;
         private List<PurchaseHistory> purchaseHistories;
+        private List<Pet> pets;
         private int currentMaxId = 0;
+        private int currentMaxPetId = 0;
+
+        // ✅ MÀU SẮC CHỦ ĐẠO
+        private readonly Color primaryColor = Color.FromArgb(41, 128, 185);      // Xanh dương đậm
+        private readonly Color secondaryColor = Color.FromArgb(52, 152, 219);    // Xanh dương nhạt
+        private readonly Color accentColor = Color.FromArgb(46, 204, 113);       // Xanh lá
+        private readonly Color dangerColor = Color.FromArgb(231, 76, 60);        // Đỏ cam
+        private readonly Color warningColor = Color.FromArgb(241, 196, 15);      // Vàng
+        private readonly Color bgColor = Color.FromArgb(236, 240, 241);          // Xám nhạt
+        private readonly Color cardColor = Color.White;                           // Trắng
+        private readonly Color textColor = Color.FromArgb(44, 62, 80);           // Xám đậm
 
         public frmKhachHang()
         {
@@ -19,6 +31,44 @@ namespace QuanLyThuCung
             InitializeData();
             LoadCustomerList();
             SetButtonRounded(btnAdd, 18);
+            ApplyModernTheme();
+        }
+
+        private void ApplyModernTheme()
+        {
+            this.BackColor = bgColor;
+            this.ForeColor = textColor;
+
+            // Panel chính
+            panelMain.BackColor = bgColor;
+
+            // DataGridView
+            dgvCustomers.BackgroundColor = cardColor;
+            dgvCustomers.GridColor = Color.FromArgb(189, 195, 199);
+            dgvCustomers.ColumnHeadersDefaultCellStyle.BackColor = primaryColor;
+            dgvCustomers.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgvCustomers.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            dgvCustomers.ColumnHeadersHeight = 45;
+            dgvCustomers.EnableHeadersVisualStyles = false;
+            dgvCustomers.RowTemplate.Height = 45;
+            dgvCustomers.DefaultCellStyle.Font = new Font("Segoe UI", 9.5F);
+            dgvCustomers.DefaultCellStyle.ForeColor = textColor;
+            dgvCustomers.DefaultCellStyle.BackColor = cardColor;
+            dgvCustomers.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(248, 249, 250);
+            dgvCustomers.DefaultCellStyle.SelectionBackColor = secondaryColor;
+            dgvCustomers.DefaultCellStyle.SelectionForeColor = Color.White;
+
+            // Nút Thêm
+            btnAdd.BackColor = accentColor;
+            btnAdd.ForeColor = Color.White;
+            btnAdd.FlatAppearance.MouseOverBackColor = Color.FromArgb(39, 174, 96);
+            btnAdd.FlatAppearance.MouseDownBackColor = Color.FromArgb(39, 174, 96);
+            btnAdd.FlatStyle = FlatStyle.Flat;
+            btnAdd.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
+
+            // Label tiêu đề
+            lblTitle.ForeColor = primaryColor;
+            lblTitle.Font = new Font("Segoe UI", 16F, FontStyle.Bold);
         }
 
         private void ResetIds()
@@ -31,7 +81,17 @@ namespace QuanLyThuCung
             currentMaxId = customers.Count > 0 ? customers.Max(c => c.Id) : 0;
         }
 
-        // Form nhập liệu khách hàng đầy đủ
+        public class Pet
+        {
+            public int Id { get; set; }
+            public string Name { get; set; }
+            public string Type { get; set; }
+            public string Breed { get; set; }
+            public int Age { get; set; }
+            public int CustomerId { get; set; }
+        }
+
+        // Form nhập liệu khách hàng với màu sắc đẹp
         private class frmNhapKhachHang : Form
         {
             private TextBox txtName;
@@ -46,6 +106,8 @@ namespace QuanLyThuCung
             private Label lblAddress;
             private Label lblEmail;
             private Label lblOtherInfo;
+            private Panel headerPanel;
+            private Label lblTitle;
 
             public frmNhapKhachHang()
             {
@@ -54,131 +116,193 @@ namespace QuanLyThuCung
 
             private void InitializeComponent()
             {
+                Color primaryColor = Color.FromArgb(41, 128, 185);
+                Color accentColor = Color.FromArgb(46, 204, 113);
+                Color dangerColor = Color.FromArgb(231, 76, 60);
+                Color bgColor = Color.FromArgb(245, 247, 250);
+                Color cardColor = Color.White;
+                Color textColor = Color.FromArgb(44, 62, 80);
+
                 this.Text = "Thêm khách hàng mới";
-                this.Size = new System.Drawing.Size(550, 500);
+                this.Size = new System.Drawing.Size(600, 620);
                 this.FormBorderStyle = FormBorderStyle.FixedDialog;
                 this.StartPosition = FormStartPosition.CenterParent;
                 this.MaximizeBox = false;
                 this.MinimizeBox = false;
-                this.BackColor = Color.FromArgb(245, 245, 245);
+                this.BackColor = bgColor;
+
+                // Header panel với màu gradient
+                this.headerPanel = new Panel();
+                this.headerPanel.BackColor = primaryColor;
+                this.headerPanel.Location = new Point(0, 0);
+                this.headerPanel.Size = new Size(600, 80);
+                this.Controls.Add(this.headerPanel);
+
+                // Title trong header
+                this.lblTitle = new Label();
+                this.lblTitle.Text = "📝 THÔNG TIN KHÁCH HÀNG";
+                this.lblTitle.Location = new Point(20, 25);
+                this.lblTitle.Size = new Size(560, 30);
+                this.lblTitle.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
+                this.lblTitle.ForeColor = Color.White;
+                this.lblTitle.TextAlign = ContentAlignment.MiddleCenter;
+                this.headerPanel.Controls.Add(this.lblTitle);
 
                 this.lblName = new Label();
-                this.lblName.Text = "Tên khách hàng:";
-                this.lblName.Location = new Point(30, 25);
-                this.lblName.Size = new Size(470, 20);
+                this.lblName.Text = "Họ và tên:";
+                this.lblName.Location = new Point(30, 100);
+                this.lblName.Size = new Size(520, 25);
                 this.lblName.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+                this.lblName.ForeColor = textColor;
                 this.Controls.Add(this.lblName);
 
                 this.txtName = new TextBox();
-                this.txtName.Location = new Point(30, 50);
-                this.txtName.Size = new Size(470, 30);
+                this.txtName.Location = new Point(30, 128);
+                this.txtName.Size = new Size(520, 35);
                 this.txtName.Font = new Font("Segoe UI", 10F);
+                this.txtName.BackColor = cardColor;
+                this.txtName.BorderStyle = BorderStyle.FixedSingle;
                 this.Controls.Add(this.txtName);
 
                 this.lblPhone = new Label();
                 this.lblPhone.Text = "Số điện thoại:";
-                this.lblPhone.Location = new Point(30, 95);
-                this.lblPhone.Size = new Size(470, 20);
+                this.lblPhone.Location = new Point(30, 178);
+                this.lblPhone.Size = new Size(520, 25);
                 this.lblPhone.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+                this.lblPhone.ForeColor = textColor;
                 this.Controls.Add(this.lblPhone);
 
                 this.txtPhone = new TextBox();
-                this.txtPhone.Location = new Point(30, 120);
-                this.txtPhone.Size = new Size(470, 30);
+                this.txtPhone.Location = new Point(30, 206);
+                this.txtPhone.Size = new Size(520, 35);
                 this.txtPhone.Font = new Font("Segoe UI", 10F);
+                this.txtPhone.BackColor = cardColor;
+                this.txtPhone.BorderStyle = BorderStyle.FixedSingle;
                 this.Controls.Add(this.txtPhone);
 
                 this.lblAddress = new Label();
                 this.lblAddress.Text = "Địa chỉ:";
-                this.lblAddress.Location = new Point(30, 165);
-                this.lblAddress.Size = new Size(470, 20);
+                this.lblAddress.Location = new Point(30, 256);
+                this.lblAddress.Size = new Size(520, 25);
                 this.lblAddress.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+                this.lblAddress.ForeColor = textColor;
                 this.Controls.Add(this.lblAddress);
 
                 this.txtAddress = new TextBox();
-                this.txtAddress.Location = new Point(30, 190);
-                this.txtAddress.Size = new Size(470, 30);
+                this.txtAddress.Location = new Point(30, 284);
+                this.txtAddress.Size = new Size(520, 35);
                 this.txtAddress.Font = new Font("Segoe UI", 10F);
+                this.txtAddress.BackColor = cardColor;
+                this.txtAddress.BorderStyle = BorderStyle.FixedSingle;
                 this.Controls.Add(this.txtAddress);
 
                 this.lblEmail = new Label();
                 this.lblEmail.Text = "Email:";
-                this.lblEmail.Location = new Point(30, 235);
-                this.lblEmail.Size = new Size(470, 20);
+                this.lblEmail.Location = new Point(30, 334);
+                this.lblEmail.Size = new Size(520, 25);
                 this.lblEmail.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+                this.lblEmail.ForeColor = textColor;
                 this.Controls.Add(this.lblEmail);
 
                 this.txtEmail = new TextBox();
-                this.txtEmail.Location = new Point(30, 260);
-                this.txtEmail.Size = new Size(470, 30);
+                this.txtEmail.Location = new Point(30, 362);
+                this.txtEmail.Size = new Size(520, 35);
                 this.txtEmail.Font = new Font("Segoe UI", 10F);
+                this.txtEmail.BackColor = cardColor;
+                this.txtEmail.BorderStyle = BorderStyle.FixedSingle;
                 this.Controls.Add(this.txtEmail);
 
                 this.lblOtherInfo = new Label();
                 this.lblOtherInfo.Text = "Thông tin thêm:";
-                this.lblOtherInfo.Location = new Point(30, 305);
-                this.lblOtherInfo.Size = new Size(470, 20);
+                this.lblOtherInfo.Location = new Point(30, 412);
+                this.lblOtherInfo.Size = new Size(520, 25);
                 this.lblOtherInfo.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+                this.lblOtherInfo.ForeColor = textColor;
                 this.Controls.Add(this.lblOtherInfo);
 
                 this.txtOtherInfo = new TextBox();
-                this.txtOtherInfo.Location = new Point(30, 330);
-                this.txtOtherInfo.Size = new Size(470, 50);
+                this.txtOtherInfo.Location = new Point(30, 440);
+                this.txtOtherInfo.Size = new Size(520, 70);
                 this.txtOtherInfo.Multiline = true;
                 this.txtOtherInfo.Font = new Font("Segoe UI", 10F);
+                this.txtOtherInfo.BackColor = cardColor;
+                this.txtOtherInfo.BorderStyle = BorderStyle.FixedSingle;
                 this.Controls.Add(this.txtOtherInfo);
 
-                // ✅ SỬA: Thêm event Click thay vì set DialogResult
                 this.btnLuu = new Button();
-                this.btnLuu.Text = "Lưu";
-                this.btnLuu.Location = new Point(280, 400);
-                this.btnLuu.Size = new Size(100, 35);
-                this.btnLuu.BackColor = Color.FromArgb(76, 175, 80);
+                this.btnLuu.Text = "💾 Lưu thông tin";
+                this.btnLuu.Location = new Point(250, 530);
+                this.btnLuu.Size = new Size(150, 40);
+                this.btnLuu.BackColor = accentColor;
                 this.btnLuu.ForeColor = Color.White;
-                this.btnLuu.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+                this.btnLuu.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
                 this.btnLuu.FlatStyle = FlatStyle.Flat;
                 this.btnLuu.FlatAppearance.BorderSize = 0;
                 this.btnLuu.Cursor = Cursors.Hand;
-                this.btnLuu.Click += new System.EventHandler(this.btnLuu_Click); // ✅ Event click
+                this.btnLuu.FlatAppearance.MouseOverBackColor = Color.FromArgb(39, 174, 96);
+                this.btnLuu.Click += new System.EventHandler(this.btnLuu_Click);
                 this.Controls.Add(this.btnLuu);
 
                 this.btnHuy = new Button();
-                this.btnHuy.Text = "Hủy";
-                this.btnHuy.Location = new Point(400, 400);
-                this.btnHuy.Size = new Size(100, 35);
-                this.btnHuy.BackColor = Color.FromArgb(158, 158, 158);
+                this.btnHuy.Text = "❌ Hủy";
+                this.btnHuy.Location = new Point(410, 530);
+                this.btnHuy.Size = new Size(140, 40);
+                this.btnHuy.BackColor = dangerColor;
                 this.btnHuy.ForeColor = Color.White;
-                this.btnHuy.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+                this.btnHuy.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
                 this.btnHuy.FlatStyle = FlatStyle.Flat;
                 this.btnHuy.FlatAppearance.BorderSize = 0;
                 this.btnHuy.Cursor = Cursors.Hand;
                 this.btnHuy.DialogResult = DialogResult.Cancel;
+                this.btnHuy.FlatAppearance.MouseOverBackColor = Color.FromArgb(192, 57, 43);
                 this.Controls.Add(this.btnHuy);
 
                 this.AcceptButton = this.btnLuu;
                 this.CancelButton = this.btnHuy;
             }
 
-            // ✅ VALIDATION Ở ĐÂY - KHÔNG ĐÓNG FORM NẾU LỖI
             private void btnLuu_Click(object sender, EventArgs e)
             {
                 if (string.IsNullOrWhiteSpace(this.txtName.Text))
                 {
-                    MessageBox.Show("Vui lòng nhập tên khách hàng!", "Lỗi",
+                    MessageBox.Show("❌ Vui lòng nhập tên khách hàng!", "Lỗi",
                         MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     this.txtName.Focus();
-                    return; // ✅ Không đóng form
+                    return;
                 }
 
                 if (string.IsNullOrWhiteSpace(this.txtPhone.Text))
                 {
-                    MessageBox.Show("Vui lòng nhập số điện thoại!", "Lỗi",
+                    MessageBox.Show("❌ Vui lòng nhập số điện thoại!", "Lỗi",
                         MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     this.txtPhone.Focus();
-                    return; // ✅ Không đóng form
+                    return;
                 }
 
-                // ✅ Validation pass mới đóng form
+                if (string.IsNullOrWhiteSpace(this.txtAddress.Text))
+                {
+                    MessageBox.Show("❌ Vui lòng nhập địa chỉ!", "Lỗi",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    this.txtAddress.Focus();
+                    return;
+                }
+
+                if (string.IsNullOrWhiteSpace(this.txtEmail.Text))
+                {
+                    MessageBox.Show("❌ Vui lòng nhập email!", "Lỗi",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    this.txtEmail.Focus();
+                    return;
+                }
+
+                if (string.IsNullOrWhiteSpace(this.txtOtherInfo.Text))
+                {
+                    MessageBox.Show("❌ Vui lòng nhập thông tin thêm!", "Lỗi",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    this.txtOtherInfo.Focus();
+                    return;
+                }
+
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
@@ -204,12 +328,16 @@ namespace QuanLyThuCung
                 new Customer { Id = 2, Name = "Trần Thị Lan", Address = "456 Lê Lợi, P.1, Q.1, TP.HCM", Phone = "0912345678", Email = "lan.tran@gmail.com", OtherInfo = "Mua thường xuyên" },
                 new Customer { Id = 3, Name = "Lê Hoàng Dũng", Address = "789 Võ Văn Tần, P.6, Q.3, TP.HCM", Phone = "0923456789", Email = "dung.le@gmail.com", OtherInfo = "" },
                 new Customer { Id = 4, Name = "Phạm Thị Mai", Address = "321 CM Tháng 8, P.12, Q.10, TP.HCM", Phone = "0934567890", Email = "mai.pham@gmail.com", OtherInfo = "Thích đồ cao cấp" },
-                new Customer { Id = 5, Name = "Hoàng Văn Tuấn", Address = "654 Nguyễn Đình Chiểu, P.3, Q.1, TP.HCM", Phone = "0945678901", Email = "tuan.hoang@gmail.com", OtherInfo = "" },
-                new Customer { Id = 6, Name = "Võ Thị Hương", Address = "987 Pasteur, P.Bến Nghé, Q.1, TP.HCM", Phone = "0956789012", Email = "huong.vo@gmail.com", OtherInfo = "Khách VIP" },
-                new Customer { Id = 7, Name = "Đặng Văn Cường", Address = "246 Nguyễn Trãi, P.Nguyễn Cư Trinh, Q.1, TP.HCM", Phone = "0967890123", Email = "cuong.dang@gmail.com", OtherInfo = "" },
-                new Customer { Id = 8, Name = "Bùi Thị Nhung", Address = "135 Nguyễn Văn Cừ, P.2, Q.5, TP.HCM", Phone = "0978901234", Email = "nhung.bui@gmail.com", OtherInfo = "Thích mua thức ăn cho chó" },
-                new Customer { Id = 9, Name = "Lý Văn Hùng", Address = "468 Điện Biên Phủ, P.11, Q.10, TP.HCM", Phone = "0989012345", Email = "hung.ly@gmail.com", OtherInfo = "" },
-                new Customer { Id = 10, Name = "Trương Thị Mỹ Linh", Address = "579 Nguyễn Kiệm, P.9, Phú Nhuận, TP.HCM", Phone = "0990123456", Email = "mylinh.truong@gmail.com", OtherInfo = "Khách quen" }
+                new Customer { Id = 5, Name = "Hoàng Văn Tuấn", Address = "654 Nguyễn Đình Chiểu, P.3, Q.1, TP.HCM", Phone = "0945678901", Email = "tuan.hoang@gmail.com", OtherInfo = "" }
+            };
+
+            pets = new List<Pet>
+            {
+                new Pet { Id = 1, Name = "Pun", Type = "Chó", Breed = "Poodle", Age = 2, CustomerId = 1 },
+                new Pet { Id = 2, Name = "Miso", Type = "Chó", Breed = "Poodle", Age = 3, CustomerId = 1 },
+                new Pet { Id = 3, Name = "Mimi", Type = "Mèo", Breed = "Anh lông ngắn", Age = 1, CustomerId = 2 },
+                new Pet { Id = 4, Name = "Bông", Type = "Mèo", Breed = "Ba Tư", Age = 2, CustomerId = 3 },
+                new Pet { Id = 5, Name = "Vàng", Type = "Chó", Breed = "Phốc", Age = 1, CustomerId = 4 }
             };
 
             purchaseHistories = new List<PurchaseHistory>
@@ -218,14 +346,10 @@ namespace QuanLyThuCung
                 new PurchaseHistory { InvoiceId = 102, CustomerId = 1, Date = new DateTime(2024, 2, 20, 14, 15, 0), TotalAmount = 850000, Employee = "Trần Văn Nam" },
                 new PurchaseHistory { InvoiceId = 103, CustomerId = 2, Date = new DateTime(2024, 3, 5, 9, 45, 0), TotalAmount = 2100000, Employee = "Nguyễn Thị Hương" },
                 new PurchaseHistory { InvoiceId = 104, CustomerId = 3, Date = new DateTime(2024, 3, 10, 16, 20, 0), TotalAmount = 650000, Employee = "Lê Thị Mai" },
-                new PurchaseHistory { InvoiceId = 105, CustomerId = 4, Date = new DateTime(2024, 3, 12, 11, 0, 0), TotalAmount = 1500000, Employee = "Nguyễn Thị Hương" },
-                new PurchaseHistory { InvoiceId = 106, CustomerId = 5, Date = new DateTime(2024, 3, 15, 15, 30, 0), TotalAmount = 950000, Employee = "Trần Văn Nam" },
-                new PurchaseHistory { InvoiceId = 107, CustomerId = 6, Date = new DateTime(2024, 3, 18, 10, 0, 0), TotalAmount = 3200000, Employee = "Lê Thị Mai" },
-                new PurchaseHistory { InvoiceId = 108, CustomerId = 7, Date = new DateTime(2024, 3, 20, 14, 45, 0), TotalAmount = 780000, Employee = "Nguyễn Thị Hương" },
-                new PurchaseHistory { InvoiceId = 109, CustomerId = 8, Date = new DateTime(2024, 3, 22, 9, 15, 0), TotalAmount = 1100000, Employee = "Trần Văn Nam" },
-                new PurchaseHistory { InvoiceId = 110, CustomerId = 9, Date = new DateTime(2024, 3, 25, 16, 0, 0), TotalAmount = 2500000, Employee = "Lê Thị Mai" }
+                new PurchaseHistory { InvoiceId = 105, CustomerId = 4, Date = new DateTime(2024, 3, 12, 11, 0, 0), TotalAmount = 1500000, Employee = "Nguyễn Thị Hương" }
             };
 
+            currentMaxPetId = pets.Count > 0 ? pets.Max(p => p.Id) : 0;
             ResetIds();
         }
 
@@ -255,7 +379,7 @@ namespace QuanLyThuCung
         {
             if (e.RowIndex % 2 == 0)
             {
-                dgvCustomers.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.FromArgb(245, 245, 245);
+                dgvCustomers.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.FromArgb(248, 249, 250);
             }
             else
             {
@@ -271,7 +395,6 @@ namespace QuanLyThuCung
                 {
                     Customer newCustomer = inputForm.GetCustomerData();
 
-                    // ✅ Validation đã xử lý trong form rồi
                     newCustomer.Id = GetNextId();
                     customers.Add(newCustomer);
 
@@ -287,7 +410,7 @@ namespace QuanLyThuCung
                         dgvCustomers.Rows[lastRowIndex].Selected = true;
                     }
 
-                    MessageBox.Show($"✅ Thêm thành công!\nID: {newCustomer.Id}\nTên: {newCustomer.Name}",
+                    MessageBox.Show($"✅ Thêm thành công!\n👤 ID: {newCustomer.Id}\n📛 Tên: {newCustomer.Name}",
                         "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
@@ -321,8 +444,9 @@ namespace QuanLyThuCung
             if (customer == null) return;
 
             var customerHistories = purchaseHistories.FindAll(h => h.CustomerId == customerId);
+            var customerPets = pets.FindAll(p => p.CustomerId == customerId);
 
-            frmKhachHang_ChiTiet detailForm = new frmKhachHang_ChiTiet(customer, customerHistories);
+            frmKhachHang_ChiTiet detailForm = new frmKhachHang_ChiTiet(customer, customerHistories, customerPets, this);
             detailForm.ShowDialog();
         }
 
@@ -330,6 +454,7 @@ namespace QuanLyThuCung
         {
             customers.RemoveAll(c => c.Id == customerId);
             purchaseHistories.RemoveAll(h => h.CustomerId == customerId);
+            pets.RemoveAll(p => p.CustomerId == customerId);
 
             ResetIds();
 
@@ -340,6 +465,15 @@ namespace QuanLyThuCung
         private int GetNextId()
         {
             return currentMaxId + 1;
+        }
+
+        public void RefreshPetList(int customerId, List<Pet> updatedPets)
+        {
+            pets.RemoveAll(p => p.CustomerId == customerId);
+            pets.AddRange(updatedPets.Where(p => p.CustomerId == customerId));
+
+            if (pets.Count > 0)
+                currentMaxPetId = pets.Max(p => p.Id);
         }
 
         private void SetButtonRounded(Button btn, int radius)
