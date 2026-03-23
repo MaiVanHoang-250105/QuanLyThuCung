@@ -485,6 +485,7 @@ namespace QuanLyThuCung
             path.CloseFigure();
             btn.Region = new Region(path);
         }
+
     }
 
     public class Customer
