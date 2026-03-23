@@ -196,6 +196,13 @@ namespace HTQuanLyThuCung
         {
             lblTitle.Text = "Dịch vụ";
             panelDashboard.Visible = false;
+
+            OpenChildForm(new frmDichVu());
+
+            //MessageBox.Show("Chức năng Dịch vụ đang được phát triển!",
+            //"Thông báo",
+            //MessageBoxButtons.OK,
+            //MessageBoxIcon.Information);
             MessageBox.Show("Chức năng Dịch vụ đang được phát triển!",
                 "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
@@ -204,6 +211,13 @@ namespace HTQuanLyThuCung
         {
             lblTitle.Text = "Nhân viên";
             panelDashboard.Visible = false;
+
+            OpenChildForm(new frmNhanVien());
+
+            //MessageBox.Show("Chức năng Nhân viên đang được phát triển!",
+               // "Thông báo",
+               // MessageBoxButtons.OK,
+               // MessageBoxIcon.Information);
             MessageBox.Show("Chức năng Nhân viên đang được phát triển!",
                 "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
