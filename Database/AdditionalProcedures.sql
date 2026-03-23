@@ -1,6 +1,8 @@
 ﻿USE QuanLyThuCung;
 
--- Thêm cột nếu chưa có
+-- =============================================
+-- CUSTOMERS
+-- =============================================
 IF NOT EXISTS (SELECT 1 FROM sys.columns WHERE object_id=OBJECT_ID('Customers') AND name='Email')
     ALTER TABLE Customers ADD Email NVARCHAR(100) NULL;
 GO
@@ -8,27 +10,44 @@ IF NOT EXISTS (SELECT 1 FROM sys.columns WHERE object_id=OBJECT_ID('Customers') 
     ALTER TABLE Customers ADD OtherInfo NVARCHAR(200) NULL;
 GO
 
--- Update email
-UPDATE Customers SET Email='nam.nguyen@gmail.com',   OtherInfo=N'Khách thân thiết'     WHERE Id=1  AND (Email IS NULL OR Email='');
-UPDATE Customers SET Email='mai.tran@gmail.com',     OtherInfo=N'Mua thường xuyên'     WHERE Id=2  AND (Email IS NULL OR Email='');
-UPDATE Customers SET Email='hung.le@gmail.com',      OtherInfo=N'Khách VIP'            WHERE Id=3  AND (Email IS NULL OR Email='');
-UPDATE Customers SET Email='lan.pham@gmail.com',     OtherInfo=N'Thích đồ cao cấp'     WHERE Id=4  AND (Email IS NULL OR Email='');
-UPDATE Customers SET Email='duc.hoang@gmail.com',    OtherInfo=N''                     WHERE Id=5  AND (Email IS NULL OR Email='');
-UPDATE Customers SET Email='huong.ngo@gmail.com',    OtherInfo=N'Hay mua cuối tuần'    WHERE Id=6  AND (Email IS NULL OR Email='');
-UPDATE Customers SET Email='hung.vu@gmail.com',      OtherInfo=N''                     WHERE Id=7  AND (Email IS NULL OR Email='');
-UPDATE Customers SET Email='lan.do@gmail.com',       OtherInfo=N'Khách quen'           WHERE Id=8  AND (Email IS NULL OR Email='');
-UPDATE Customers SET Email='minh.bui@gmail.com',     OtherInfo=N''                     WHERE Id=9  AND (Email IS NULL OR Email='');
-UPDATE Customers SET Email='nga.ly@gmail.com',       OtherInfo=N'Thích dịch vụ tắm'   WHERE Id=10 AND (Email IS NULL OR Email='');
-UPDATE Customers SET Email='phong.dinh@gmail.com',   OtherInfo=N''                     WHERE Id=11 AND (Email IS NULL OR Email='');
-UPDATE Customers SET Email='quynh.mai@gmail.com',    OtherInfo=N'Mua định kỳ'          WHERE Id=12 AND (Email IS NULL OR Email='');
-UPDATE Customers SET Email='son.ta@gmail.com',       OtherInfo=N''                     WHERE Id=13 AND (Email IS NULL OR Email='');
-UPDATE Customers SET Email='trang.vo@gmail.com',     OtherInfo=N'Khách thân thiết'     WHERE Id=14 AND (Email IS NULL OR Email='');
-UPDATE Customers SET Email='tuan.phan@gmail.com',    OtherInfo=N''                     WHERE Id=15 AND (Email IS NULL OR Email='');
-UPDATE Customers SET Email='hoa.truong@gmail.com',   OtherInfo=N'Khách mới'            WHERE Id=16 AND (Email IS NULL OR Email='');
-UPDATE Customers SET Email='khai.luu@gmail.com',     OtherInfo=N''                     WHERE Id=17 AND (Email IS NULL OR Email='');
-UPDATE Customers SET Email='phuong.dang@gmail.com',  OtherInfo=N'Hay đặt lịch trước'  WHERE Id=18 AND (Email IS NULL OR Email='');
-UPDATE Customers SET Email='binh.cao@gmail.com',     OtherInfo=N''                     WHERE Id=19 AND (Email IS NULL OR Email='');
-UPDATE Customers SET Email='cam.huynh@gmail.com',    OtherInfo=N'Khách VIP'            WHERE Id=20 AND (Email IS NULL OR Email='');
+-- =============================================
+-- SERVICES
+-- =============================================
+IF NOT EXISTS (SELECT 1 FROM sys.columns WHERE object_id=OBJECT_ID('Services') AND name='Description')
+    ALTER TABLE Services ADD Description NVARCHAR(500) NULL;
+GO
+
+
+UPDATE Customers SET Email='nam.nguyen@gmail.com',   OtherInfo=N'Khách thân thiết'    WHERE Id=1  AND (Email IS NULL OR Email='');
+UPDATE Customers SET Email='mai.tran@gmail.com',     OtherInfo=N'Mua thường xuyên'    WHERE Id=2  AND (Email IS NULL OR Email='');
+UPDATE Customers SET Email='hung.le@gmail.com',      OtherInfo=N'Khách VIP'           WHERE Id=3  AND (Email IS NULL OR Email='');
+UPDATE Customers SET Email='lan.pham@gmail.com',     OtherInfo=N'Thích đồ cao cấp'    WHERE Id=4  AND (Email IS NULL OR Email='');
+UPDATE Customers SET Email='duc.hoang@gmail.com',    OtherInfo=N''                    WHERE Id=5  AND (Email IS NULL OR Email='');
+UPDATE Customers SET Email='huong.ngo@gmail.com',    OtherInfo=N'Hay mua cuối tuần'   WHERE Id=6  AND (Email IS NULL OR Email='');
+UPDATE Customers SET Email='hung.vu@gmail.com',      OtherInfo=N''                    WHERE Id=7  AND (Email IS NULL OR Email='');
+UPDATE Customers SET Email='lan.do@gmail.com',       OtherInfo=N'Khách quen'          WHERE Id=8  AND (Email IS NULL OR Email='');
+UPDATE Customers SET Email='minh.bui@gmail.com',     OtherInfo=N''                    WHERE Id=9  AND (Email IS NULL OR Email='');
+UPDATE Customers SET Email='nga.ly@gmail.com',       OtherInfo=N'Thích dịch vụ tắm'  WHERE Id=10 AND (Email IS NULL OR Email='');
+UPDATE Customers SET Email='phong.dinh@gmail.com',   OtherInfo=N''                    WHERE Id=11 AND (Email IS NULL OR Email='');
+UPDATE Customers SET Email='quynh.mai@gmail.com',    OtherInfo=N'Mua định kỳ'         WHERE Id=12 AND (Email IS NULL OR Email='');
+UPDATE Customers SET Email='son.ta@gmail.com',       OtherInfo=N''                    WHERE Id=13 AND (Email IS NULL OR Email='');
+UPDATE Customers SET Email='trang.vo@gmail.com',     OtherInfo=N'Khách thân thiết'    WHERE Id=14 AND (Email IS NULL OR Email='');
+UPDATE Customers SET Email='tuan.phan@gmail.com',    OtherInfo=N''                    WHERE Id=15 AND (Email IS NULL OR Email='');
+UPDATE Customers SET Email='hoa.truong@gmail.com',   OtherInfo=N'Khách mới'           WHERE Id=16 AND (Email IS NULL OR Email='');
+UPDATE Customers SET Email='khai.luu@gmail.com',     OtherInfo=N''                    WHERE Id=17 AND (Email IS NULL OR Email='');
+UPDATE Customers SET Email='phuong.dang@gmail.com',  OtherInfo=N'Hay đặt lịch trước' WHERE Id=18 AND (Email IS NULL OR Email='');
+UPDATE Customers SET Email='binh.cao@gmail.com',     OtherInfo=N''                    WHERE Id=19 AND (Email IS NULL OR Email='');
+UPDATE Customers SET Email='cam.huynh@gmail.com',    OtherInfo=N'Khách VIP'           WHERE Id=20 AND (Email IS NULL OR Email='');
+GO
+
+UPDATE Services SET Description=N'Kiểm tra sức khỏe tổng quát'    WHERE ServiceName=N'Khám sức khỏe'  AND (Description IS NULL OR Description='');
+UPDATE Services SET Description=N'Tiêm các loại vaccine phòng bệnh' WHERE ServiceName=N'Tiêm phòng'    AND (Description IS NULL OR Description='');
+UPDATE Services SET Description=N'Tắm rửa vệ sinh sạch sẽ'        WHERE ServiceName=N'Tắm rửa'        AND (Description IS NULL OR Description='');
+UPDATE Services SET Description=N'Cắt tỉa lông theo yêu cầu'      WHERE ServiceName=N'Cắt tỉa lông'   AND (Description IS NULL OR Description='');
+UPDATE Services SET Description=N'Vệ sinh tai định kỳ'             WHERE ServiceName=N'Vệ sinh tai'    AND (Description IS NULL OR Description='');
+UPDATE Services SET Description=N'Cắt móng an toàn'               WHERE ServiceName=N'Cắt móng'       AND (Description IS NULL OR Description='');
+UPDATE Services SET Description=N'Xét nghiệm máu kiểm tra sức khỏe' WHERE ServiceName=N'Xét nghiệm máu' AND (Description IS NULL OR Description='');
+UPDATE Services SET Description=N'Siêu âm kiểm tra nội tạng'      WHERE ServiceName=N'Siêu âm'        AND (Description IS NULL OR Description='');
 GO
 
 -- =============================================
@@ -84,7 +103,7 @@ GO
 CREATE PROCEDURE sp_GetCustomers AS
 BEGIN
     SELECT Id, CustomerName, Phone, Address,
-           ISNULL(Email,'') AS Email,
+           ISNULL(Email,'')     AS Email,
            ISNULL(OtherInfo,'') AS OtherInfo
     FROM Customers ORDER BY Id
 END
@@ -121,20 +140,12 @@ BEGIN
 END
 GO
 
--- =============================================
--- SP LỊCH SỬ MUA HÀNG
--- =============================================
 IF OBJECT_ID('sp_GetHoaDonByCustomer','P') IS NOT NULL DROP PROCEDURE sp_GetHoaDonByCustomer;
 GO
 CREATE PROCEDURE sp_GetHoaDonByCustomer @CustomerId INT AS
 BEGIN
     SET NOCOUNT ON;
-    SELECT
-        h.Id       AS MaHD,
-        h.NgayLap,
-        h.TongTien,
-        h.NhanVien,
-        h.GhiChu
+    SELECT h.Id AS MaHD, h.NgayLap, h.TongTien, h.NhanVien, h.GhiChu
     FROM HoaDon h
     WHERE h.CustomerId = @CustomerId
     ORDER BY h.NgayLap DESC
@@ -159,4 +170,5 @@ PRINT '===================================='
 PRINT 'AdditionalProcedures chạy thành công'
 PRINT '===================================='
 SELECT * FROM Customers;
+SELECT * FROM Services;
 GO

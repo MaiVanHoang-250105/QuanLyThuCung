@@ -158,7 +158,8 @@ CREATE TABLE Services
 (
     Id          INT IDENTITY(1,1) PRIMARY KEY,
     ServiceName NVARCHAR(100) NOT NULL,
-    Price       DECIMAL(10,2) NULL
+    Price       DECIMAL(10,2) NULL,
+    Description NVARCHAR(500) NULL    -- ✅ Thêm mới
 );
 GO
 
@@ -232,7 +233,7 @@ GO
 CREATE PROCEDURE sp_GetRecentTasks @UserId INT
 AS
 BEGIN
-    SELECT TOP 10 * FROM Tasks WHERE UserId = @UserId ORDER BY CreatedDate DESC
+    SELECT TOP 10 * FROM Tasks WHERE UserId=@UserId ORDER BY CreatedDate DESC
 END
 GO
 
@@ -257,10 +258,8 @@ BEGIN
     DECLARE @id INT, @active BIT
     SELECT @id=Id, @active=IsActive FROM Users
     WHERE Username=@UsernameOrEmail OR Email=@UsernameOrEmail
-
     IF @id IS NULL BEGIN SET @Result=-1 RETURN END
     IF @active=0   BEGIN SET @Result=-2 RETURN END
-
     UPDATE Users SET PasswordHash=@NewPassword WHERE Id=@id
     SET @Result=1
 END

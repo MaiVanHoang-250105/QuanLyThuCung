@@ -20,7 +20,9 @@ INSERT INTO #TempNames VALUES
 (N'Lý Thị',N'Nga'),     (N'Đinh Văn',N'Phong'),  (N'Mai Thị',N'Quỳnh'),
 (N'Tạ Văn',N'Sơn'),     (N'Võ Thị',N'Trang'),   (N'Phan Văn',N'Tuấn')
 
+-- =============================================
 -- USERS
+-- =============================================
 WHILE @Counter <= @SoLuongUsers
 BEGIN
     SELECT TOP 1 @FullName = FirstName + ' ' + LastName FROM #TempNames ORDER BY NEWID()
@@ -42,7 +44,7 @@ BEGIN
     PRINT 'Đã tạo admin'
 END
 
--- Thêm cột nếu bảng Customers cũ chưa có
+-- Thêm cột nếu chưa có
 IF OBJECT_ID('Customers') IS NOT NULL
 BEGIN
     IF NOT EXISTS (SELECT 1 FROM sys.columns WHERE object_id=OBJECT_ID('Customers') AND name='Email')
@@ -51,7 +53,14 @@ BEGIN
         ALTER TABLE Customers ADD OtherInfo NVARCHAR(200) NULL;
 END
 
--- Thêm bảng HoaDon
+-- Thêm cột Description cho Services nếu chưa có
+IF OBJECT_ID('Services') IS NOT NULL
+BEGIN
+    IF NOT EXISTS (SELECT 1 FROM sys.columns WHERE object_id=OBJECT_ID('Services') AND name='Description')
+        ALTER TABLE Services ADD Description NVARCHAR(500) NULL;
+END
+
+-- Thêm bảng HoaDon nếu chưa có
 IF OBJECT_ID('HoaDon') IS NULL
 BEGIN
     CREATE TABLE HoaDon (
@@ -64,7 +73,7 @@ BEGIN
     )
 END
 
--- Thêm bảng ChiTietHoaDon
+-- Thêm bảng ChiTietHoaDon nếu chưa có
 IF OBJECT_ID('ChiTietHoaDon') IS NULL
 BEGIN
     CREATE TABLE ChiTietHoaDon (
@@ -80,7 +89,7 @@ END
 
 -- Dọn duplicate
 DELETE FROM Appointments;
-DELETE FROM Pets WHERE Id NOT IN (SELECT MIN(Id) FROM Pets GROUP BY PetName, CustomerId);
+DELETE FROM Pets      WHERE Id NOT IN (SELECT MIN(Id) FROM Pets      GROUP BY PetName, CustomerId);
 DELETE FROM Customers WHERE Id NOT IN (SELECT MIN(Id) FROM Customers GROUP BY CustomerName, Phone);
 
 DBCC CHECKIDENT ('Customers',    RESEED, 0);
@@ -150,15 +159,15 @@ END
 -- =============================================
 IF NOT EXISTS (SELECT 1 FROM Services)
 BEGIN
-    INSERT INTO Services (ServiceName, Price) VALUES
-    (N'Khám sức khỏe',  100000),
-    (N'Tiêm phòng',     150000),
-    (N'Tắm rửa',         80000),
-    (N'Cắt tỉa lông',   120000),
-    (N'Vệ sinh tai',     50000),
-    (N'Cắt móng',        40000),
-    (N'Xét nghiệm máu', 200000),
-    (N'Siêu âm',        300000)
+    INSERT INTO Services (ServiceName, Price, Description) VALUES
+    (N'Khám sức khỏe',  100000, N'Kiểm tra sức khỏe tổng quát cho thú cưng'),
+    (N'Tiêm phòng',     150000, N'Tiêm các loại vaccine phòng bệnh'),
+    (N'Tắm rửa',         80000, N'Tắm rửa vệ sinh sạch sẽ cho thú cưng'),
+    (N'Cắt tỉa lông',   120000, N'Cắt tỉa lông theo yêu cầu'),
+    (N'Vệ sinh tai',     50000, N'Vệ sinh tai định kỳ'),
+    (N'Cắt móng',        40000, N'Cắt móng an toàn cho thú cưng'),
+    (N'Xét nghiệm máu', 200000, N'Xét nghiệm máu kiểm tra sức khỏe'),
+    (N'Siêu âm',        300000, N'Siêu âm kiểm tra nội tạng')
     PRINT 'Đã tạo 8 Services'
 END
 
@@ -192,7 +201,7 @@ BEGIN
 END
 
 -- =============================================
--- HÓA ĐƠN
+-- 15 HÓA ĐƠN
 -- =============================================
 IF NOT EXISTS (SELECT 1 FROM HoaDon)
 BEGIN
