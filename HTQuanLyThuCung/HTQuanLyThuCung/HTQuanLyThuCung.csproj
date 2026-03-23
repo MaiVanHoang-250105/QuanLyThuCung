@@ -95,6 +95,7 @@
     </Compile>
     <Compile Include="frmDichVu.Designer.cs">
       <DependentUpon>frmDichVu.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmInHoaDon.cs">
       <SubType>Form</SubType>
     </Compile>
