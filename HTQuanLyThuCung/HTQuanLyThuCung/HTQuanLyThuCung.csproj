@@ -61,7 +61,6 @@
       <DependentUpon>CalendarView.cs</DependentUpon>
     </Compile>
     <Compile Include="DataAccess\DatabaseHelper.cs" />
-    <Compile Include="frmBanHang.cs" />
     <Compile Include="frmDangKy.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -74,11 +73,15 @@
     <Compile Include="frmDangNhap.Designer.cs">
       <DependentUpon>frmDangNhap.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmDanhGia.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="frmDanhGia.cs" />
     <Compile Include="frmDanhGia.Designer.cs">
       <DependentUpon>frmDanhGia.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmDatLich.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDatLich.Designer.cs">
+      <DependentUpon>frmDatLich.cs</DependentUpon>
     </Compile>
     <Compile Include="frmDichVu.cs">
       <SubType>Form</SubType>
@@ -103,6 +106,18 @@
     </Compile>
     <Compile Include="frmKHDanhGia.Designer.cs">
       <DependentUpon>frmKHDanhGia.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmLichHen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLichHen.Designer.cs">
+      <DependentUpon>frmLichHen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmNhanVien.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmNhanVien.Designer.cs">
+      <DependentUpon>frmNhanVien.cs</DependentUpon>
     </Compile>
     <Compile Include="frmPetForm.cs">
       <SubType>Form</SubType>
@@ -147,6 +162,9 @@
     <EmbeddedResource Include="frmDanhGia.resx">
       <DependentUpon>frmDanhGia.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmDatLich.resx">
+      <DependentUpon>frmDatLich.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmDichVu.resx">
       <DependentUpon>frmDichVu.cs</DependentUpon>
     </EmbeddedResource>
@@ -155,6 +173,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmKHDanhGia.resx">
       <DependentUpon>frmKHDanhGia.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmLichHen.resx">
+      <DependentUpon>frmLichHen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmNhanVien.resx">
+      <DependentUpon>frmNhanVien.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

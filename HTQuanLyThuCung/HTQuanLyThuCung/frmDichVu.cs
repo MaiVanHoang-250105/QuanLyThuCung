@@ -30,10 +30,8 @@ namespace HTQuanLyThuCung
             SetupInterface();
             LoadServices();
 
-            // Reset Form về trạng thái trống
             ClearForm();
 
-            // Quan trọng: Bỏ chọn dòng mặc định của DataGridView
             this.BeginInvoke(new MethodInvoker(() => {
                 dgvDichVu.ClearSelection();
                 dgvDichVu.CurrentCell = null;
@@ -173,8 +171,8 @@ namespace HTQuanLyThuCung
                     DatabaseHelper.ExecuteNonQuery(query, parameters);
 
                     MessageBox.Show("Xóa thành công!");
-                    LoadServices(); // Nạp lại bảng
-                    ClearForm();    // Reset Id về -1
+                    LoadServices(); 
+                    ClearForm();    
                 }
                 catch (Exception ex)
                 {
@@ -201,7 +199,6 @@ namespace HTQuanLyThuCung
         private void btnDanhGia_Click(object sender, EventArgs e)
         {
             frmKHDanhGia f = new frmKHDanhGia();
-            // Đảm bảo Form không bị tự ý co dãn theo Font hệ thống
             f.AutoScaleMode = AutoScaleMode.None;
             f.StartPosition = FormStartPosition.CenterScreen;
             f.ShowDialog();
@@ -209,16 +206,13 @@ namespace HTQuanLyThuCung
 
         private void dgvDichVu_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            // Kiểm tra nếu nhấp vào hàng hợp lệ (không phải tiêu đề)
             if (e.RowIndex >= 0)
             {
                 DataGridViewRow row = dgvDichVu.Rows[e.RowIndex];
 
-                // Kiểm tra Id có giá trị không
                 if (row.Cells[0].Value != null && row.Cells[0].Value != DBNull.Value)
                 {
                     Id = Convert.ToInt32(row.Cells[0].Value);
-                    // Gán dữ liệu vào Textbox
                     txtTenDichVu.Text = row.Cells[1].Value?.ToString();
                     txtGiaTien.Text = row.Cells[2].Value?.ToString();
                     txtChiTiet.Text = row.Cells[3].Value?.ToString();
